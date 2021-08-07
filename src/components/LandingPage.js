@@ -6,16 +6,21 @@ const Title = styled.div`
   text-align: center;
   color: palevioletred;
 `;
-const Wrapper = styled.section`
-  padding: 40px;
-  background: papayawhip;
-  border: solid 2px black;
-`;
+const Wrapper = styled.div`
+  height: 150vh;
+  background-color: #878f99 ;
+`
+const Tiles = styled.div`
+  height: 50vh;
+  background-color: #a2b9bc;
+`
 
 function LandingPage() {
   return (
     <Wrapper>
-      <Title>Landing Page</Title>
+      <Title>LandingPage</Title>
+      <Tiles>
+      </Tiles>
     </Wrapper>
   );
 }

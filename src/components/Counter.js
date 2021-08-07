@@ -1,8 +1,24 @@
+import React, { useState } from "react";
+import styled from "styled-components";
 
-function Counter(){
-    return(
-        <div>Counter</div>
+const StyledBtn = styled.button`
+`;
+
+const Counter = (props) => {
+  
+  return (
+    <>
+    </>
+  );
+};
+
+const MathBtn = (props)=>{
+
+    return (
+        <StyledBtn />
     )
 }
 
-export default Counter;
+
+
+export default Counter 

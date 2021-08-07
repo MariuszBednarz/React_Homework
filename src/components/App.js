@@ -1,19 +1,13 @@
-import './App.css';
-import './LandingPage'
-import './Counter'
-import './Stoper'
-import LandingPage from './LandingPage';
-import Counter from './Counter';
-import Stoper from './Stoper';
+import React from "react";
+
+import "./App.css";
+import "./Routing";
+import Routing from "./Routing";
 
 function App() {
-  return (
-    <>
-      <LandingPage/>
-      <Counter/>
-      <Stoper/>
-    </>
-  );
+  return <>
+  <Routing/>
+  </>;
 }
 
 export default App;

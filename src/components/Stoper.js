@@ -1,8 +1,3 @@
+const Stoper = ()=> <p>stoper</p>
 
-function Stoper(){
-    return(
-        <div>Stoper</div>
-    )
-}
-
-export default Stoper;
+export default Stoper
