@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import Button from "@material-ui/core/Button"
+
+
 const Counter = () => {
   const [number, setNumber] = useState(0);
   const [result, setResult] = useState(0);
@@ -31,36 +34,20 @@ const Counter = () => {
   const CounterWrap = styled.div`
     width: 100vw;
     height: 100vh;
-    background-color: #493973;
+    background-color: #ccc;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   `;
-  const Btn = styled.button`
-    width: 150px;
-    height: 50px;
-    font-size: 24px;
-    border: 2px solid #a2b9bc;
-    background-color: #6b5b95;
-    margin: 20px;
-    border-radius: 20px;
-    transition: 0.2s;
-    &:hover {
-      background-color: #8d7db7;
-      border-radius: 10px;
-    }
-    &:active {
-      background-color: #fff;
-    }
-  `;
+ 
   return (
     <>
       <CounterWrap>
         <div>
-          <Btn onClick={remove}>-1</Btn>
-          <Btn onClick={reset}>reset</Btn>
-          <Btn onClick={add}>+1</Btn>
+          <Button variant="contained" color="secondary" onClick={remove}>-1</Button>
+          <Button variant="contained" color="secondary" onClick={reset}>reset</Button>
+          <Button variant="contained" color="secondary" onClick={add}>+1</Button>
         </div>
         <ResultWrap>
           <Result>wynik: {number} </Result>

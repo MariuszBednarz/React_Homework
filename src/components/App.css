@@ -4,3 +4,8 @@
   padding: 0;
   font-family: 'Roboto', sans-serif;
 }
+
+.svg_icons{
+  transform: scale(2.5);
+  margin-bottom: 50px;
+}

@@ -6,7 +6,7 @@ const Biogram = ({ firstName, lastName, biogram }) => {
   return (
     <div>
       <p>
-        Na imię mi {firstName} {lastName}
+        {firstName} {lastName}
       </p>
       <p>{biogram}</p>
     </div>
@@ -22,12 +22,12 @@ const About = () => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #a2b9bc;
+    background-color: #aaa;
   `;
   const Photo = styled.div`
     width: 300px;
     height: 300px;
-    background-color: #b2ad7f;
+    background-color: #ddd;
     border-radius: 50%;
     background-image: url(${img});
     background-size: cover;
@@ -41,7 +41,7 @@ const About = () => {
     text-align: center;
     width: 400px;
     height: 200px;
-    background-color: #b3cacd;
+    background-color: #bbb;
     margin: 30px;
     padding: 20px;
     color: #6b5b95;

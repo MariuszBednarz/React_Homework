@@ -1,6 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+
+
 import styled from "styled-components";
+import Button from "@material-ui/core/Button"
 
 import LandingPage from "./LandingPage";
 import About from "./About";
@@ -20,33 +23,18 @@ const Nav = styled.div`
   width: 100vw;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #6b5b95;
+  background-color: #ddd;
   height: 100px;
+  z-index: 20;
 `;
 
-const NavBtn = styled.button`
-  width: 100px;
-  height: 50px;
-  font-size: 18px;
-  border: 2px solid #a2b9bc;
-  background-color: #6b5b95;
-  margin: 10px;
-  border-radius: 20px;
-  text-transform: uppercase;
-  transition: 0.2s;
 
-  text-decoration: none;
+const BtnWrap = styled.div`
+display: flex;
+justify-content: space-evenly;
+width: 50vw;
 
-  color: #a2b9bc;
-  &:hover {
-    background-color: #8d7db7;
-    border-radius: 10px;
-  }
-  &:active {
-    background-color: #fff;
-  }
 `;
-const BtnWrap = styled.div``;
 
 
 const Routing = () => {
@@ -55,26 +43,26 @@ const Routing = () => {
       <Wrapper>
         <Nav>
           <Link to="/LandingPage">
-            <NavBtn>Logo </NavBtn>{" "}
+            <Button variant="contained" color="primary">Logo </Button>{" "}
           </Link>
           <BtnWrap>
             <Link to="/About">
-              <NavBtn>O mnie</NavBtn>
+              <Button variant="contained" color="primary">O mnie</Button>
             </Link>
             <Link to="/Stoper">
-              <NavBtn>Stoper</NavBtn>
+              <Button variant="contained" color="primary">Stoper</Button>
             </Link>
             <Link to="/Counter">
-              <NavBtn>Licznik</NavBtn>
+              <Button variant="contained" color="primary">Licznik</Button>
             </Link>
             <Link to="/List">
-              <NavBtn>Lista</NavBtn>
+              <Button variant="contained" color="primary">Lista</Button>
             </Link>
             <Link to="/Register">
-              <NavBtn>Rejestruj</NavBtn>
+              <Button variant="contained" color="primary">Rejestruj</Button>
             </Link>
             <Link to="/Login">
-              <NavBtn>Zaloguj</NavBtn>
+              <Button variant="contained" color="primary">Zaloguj</Button>
             </Link>
           </BtnWrap>
         </Nav>
@@ -90,6 +78,5 @@ const Routing = () => {
   );
 };
 
-//komponenty
 
 export default Routing;

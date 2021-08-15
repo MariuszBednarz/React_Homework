@@ -16,6 +16,11 @@ const Timetable = styled.div`
   width: 300px;
   height: 100px;
   background-color: #a2b9bc;
+  border-bottom: 5px #c4dbde solid;
+  border-top: 5px #80979a solid;
+  border-left: 5px #c4dbde solid; 
+  border-right: 5px #80979a solid;
+  border-radius: 5px;
   margin: 20px;
 `;
 const NumberSpan = styled.span`
@@ -25,24 +30,39 @@ const Btn = styled.button`
   width: 100px;
   height: 20px;
   background-color: #fff;
-  border: 1px #a2b9bc solid;
+  border: 2px #a2b9bc solid;
   margin: 10px;
+  transition: 0.2s;
+  &:hover {
+    background-color: #8d7db7;
+    color: #fff;
+  }
+  &:active {
+    border: 3px solid red;
+  }
 `;
-const Inps = styled.input`
-margin:10px;
+const P = styled.p`
+  font-size: 12px;
 `;
-
+const Div = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+width: 50vw;
+height: 100px;
+`;
 const DisplayTime = (props) => {
   return (
     <Timetable>
       <NumberSpan>
-        {props.time.h >= 10 ? props.time.h : `0${props.time.h}`} :{" "}
+        {props.time.h >= 10 ? props.time.h : `0${props.time.h}`} :
       </NumberSpan>
       <NumberSpan>
-        {props.time.m >= 10 ? props.time.m : `0${props.time.m}`} :{" "}
+        {props.time.m >= 10 ? props.time.m : `0${props.time.m}`} :
       </NumberSpan>
       <NumberSpan>
-        {props.time.s >= 10 ? props.time.s : `0${props.time.s}`} :{" "}
+        {props.time.s >= 10 ? props.time.s : `0${props.time.s}`} :
       </NumberSpan>
       <NumberSpan>
         {props.time.ms >= 10 ? props.time.ms : `0${props.time.ms}`}
@@ -50,7 +70,6 @@ const DisplayTime = (props) => {
     </Timetable>
   );
 };
-
 const DisplayButtons = (props) => {
   return (
     <>
@@ -62,31 +81,36 @@ const DisplayButtons = (props) => {
     </>
   );
 };
-
-
-
-
 const Stoper = () => {
   const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
   const [interv, setInterv] = useState();
   const [status, setStatus] = useState(0);
 
-  const [input, setInput] = useState({inputSecValue: 1, inputMinValue: 1, inputHrValue: 1 })
-
+  const [input, setInput] = useState({
+    inputSecValue: 1,
+    inputMinValue: 1,
+    inputHrValue: 1,
+  });
 
   const DisplayInputs = () => {
-    const handleSecChange = (e)=>{
-        console.log(e.target.value)
-        setInput({inputSecValue: e.target.value})
-    }
-        //Tu się zaciąłem. Nie bardzo wiem jak przekazać input do hooka setInput a następnie do funkcji math. W console log wartosć się zmienia, ale nie jest podawana dalej.
-
-  return (
-    <>
-      <Inps type="number" name="" id="sec"  placeholder="sec" onChange={handleSecChange}/>
-    </>
-  );
-};
+    const handleSecChange = (e) => {
+      console.log(e.target.value);
+      setInput({ inputSecValue: parseInt(e.target.value) });
+    };
+    return (
+      <>
+        <Div>
+          <input
+            type="number"
+            id="sec"
+            placeholder="wpisz sekundy"
+            onChange={handleSecChange}
+          />
+          <P>odliczaj co {input.inputSecValue} s</P>
+        </Div>
+      </>
+    );
+  };
   const start = () => {
     math();
     setStatus(1);
@@ -108,17 +132,16 @@ const Stoper = () => {
     realH = time.h;
 
   const math = () => {
-    if (realM === 59) {
-      realH ++;
+    if (realM >= 59) {
+      realH++;
       realM = 0;
     }
-    if (realS === 59) {
-    //tu chciałem przekazać wartości z hooka setInput
-      realM += input.inputSecValue;
+    if (realS >= 59) {
+      realM++;
       realS = 0;
     }
-    if (realMs === 99) {
-      realS++;
+    if (realMs >= 99) {
+      realS += input.inputSecValue;
       realMs = 0;
     }
     realMs++;
