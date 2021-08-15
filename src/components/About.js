@@ -1,19 +1,20 @@
 import styled from "styled-components";
 import React from "react";
-
 import img from "../components/portrait.jpg";
 
-const bio = {
-
-  name: "Mariusz",
-  surname: "Bednarz",
-  biogram:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis sint nobis, voluptas ducimus dolor voluptatum quae cumque dignissimos delectus temporibus!",
+const Biogram = ({ firstName, lastName, biogram }) => {
+  return (
+    <div>
+      <p>
+        Na imię mi {firstName} {lastName}
+      </p>
+      <p>{biogram}</p>
+    </div>
+  );
 };
 
-
-
 const About = () => {
+
   const BioWrapper = styled.div`
     width: 100vw;
     height: 100vh;
@@ -29,7 +30,7 @@ const About = () => {
     background-color: #b2ad7f;
     border-radius: 50%;
     background-image: url(${img});
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
   `;
   const Bio = styled.div`
@@ -44,24 +45,17 @@ const About = () => {
     margin: 30px;
     padding: 20px;
     color: #6b5b95;
+    font-size: 24px;
   `;
-  const P = styled.p`
-    font-size: 18px;
-  `;
+console.log()
   return (
     <BioWrapper>
       <Photo></Photo>
       <Bio>
-        <P>
-          {bio.name}
-          {bio.surname}
-        </P>
-        <P>{bio.biogram}</P>
+        <Biogram firstName="Mariusz" lastName="Bednarz" biogram = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, assumenda?" />
       </Bio>
     </BioWrapper>
   );
 };
-
-
 
 export default About;

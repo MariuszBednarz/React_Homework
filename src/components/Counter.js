@@ -26,7 +26,7 @@ const Counter = () => {
     color: #878f99;
   `;
   const Result = styled.p`
-    color: ${number %5 ? "#878f99" : "green"};
+    color: ${number !== 0 && number % 5 === 0 ? "green" : "#878f99"};
   `;
   const CounterWrap = styled.div`
     width: 100vw;
