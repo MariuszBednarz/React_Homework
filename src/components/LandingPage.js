@@ -4,8 +4,7 @@ import styled from "styled-components";
 
 import bckg from "../components/tlo.jpg";
 
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import { Button, TextField } from "@material-ui/core";
 
 const Title = styled.div`
   font-size: 1.5em;

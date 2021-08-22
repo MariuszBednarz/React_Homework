@@ -42,7 +42,7 @@ const Counter = () => {
   `;
  
   return (
-    <>
+    
       <CounterWrap>
         <div>
           <Button variant="contained" color="secondary" onClick={remove}>-1</Button>
@@ -55,7 +55,7 @@ const Counter = () => {
           <p>resety: {resets} </p>
         </ResultWrap>
       </CounterWrap>
-    </>
+    
   );
 };
 

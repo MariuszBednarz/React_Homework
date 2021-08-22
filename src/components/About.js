@@ -50,7 +50,7 @@ const About = () => {
 console.log()
   return (
     <BioWrapper>
-      <Photo></Photo>
+      <Photo/>
       <Bio>
         <Biogram firstName="Mariusz" lastName="Bednarz" biogram = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, assumenda?" />
       </Bio>

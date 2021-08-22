@@ -64,6 +64,7 @@ const ListContainer = () => {
       console.log(`ostatnia strona`);
     } else {
       setPage((page += 1));
+    //   Tutaj jestem w stanie zmienić stronę w linku, ale na pewno da się zrobić to lepiej. Klik zmienia stronę, ale wchodząc z przeglądarki np. na List?page=7, nie trafiam na 7 stronę.
       const nextPage = () => history.push(`/List?page=${page}`);
       nextPage();
     }
@@ -88,6 +89,8 @@ const ListContainer = () => {
         <Button onClick={prev}>Poprzednia</Button>
         <Button onClick={next}>Następna</Button>
       </BtnWrap>
+
+      {/* Tutaj mam kłopot z przekazaniem wartości i przefiltrowaniem */}
       <div>
         <label htmlFor="status">Status postaci: </label>
         <select name="status" id="status">
@@ -105,6 +108,7 @@ const ListContainer = () => {
                 <TileWrap
                   key={char.id}
                   onClick={() => history.push(`/CharPage${char.id}`)}
+                //   Już udaje mi się zrobić odnośnik do nowej strony po kliknięciu w portret, ale nie wiem czy tworzyć nowy komponent, czy jakoś mapować dane z api żeby wyświetlało jedną postać w oprarciu o pojedyncze ID. Jestem pewien że da się to prosto zrobić.
                 >
                   <img
                     src={char.image}
