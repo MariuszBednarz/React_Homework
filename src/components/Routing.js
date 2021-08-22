@@ -12,6 +12,9 @@ import Counter from "./Counter";
 import List from "./List";
 import Register from "./Register";
 import Login from "./Login";
+import Icons from "./Icons"
+
+
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -35,7 +38,6 @@ justify-content: space-evenly;
 width: 50vw;
 
 `;
-
 
 const Routing = () => {
   return (
@@ -66,7 +68,12 @@ const Routing = () => {
             </Link>
           </BtnWrap>
         </Nav>
-        <Route path="/LandingPage" component={LandingPage} />
+        <Route path="/LandingPage" component={LandingPage}> 
+        
+        <LandingPage />
+        <Icons />
+
+        </Route>
         <Route path="/About"  component={About} />
         <Route path="/Stoper" component={Stoper} />
         <Route path="/Counter" component={Counter} />
