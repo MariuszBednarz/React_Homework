@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, FormControlLabel, Switch } from "@material-ui/core";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router";
@@ -47,8 +47,11 @@ const P = styled.p`
 
 const ListContainer = () => {
   const [chars, setChars] = useState();
-  let [page, setPage] = useState(1);
+  const [sortedChars, setSortedChars] = useState();
   const history = useHistory();
+  let [page, setPage] = useState(1);
+  let [listValue, setListValue] = useState("all");
+  let [checkValue, setCheckValue] = useState(false);
 
   useEffect(() => {
     axios
@@ -64,7 +67,7 @@ const ListContainer = () => {
       console.log(`ostatnia strona`);
     } else {
       setPage((page += 1));
-    //   Tutaj jestem w stanie zmienić stronę w linku, ale na pewno da się zrobić to lepiej. Klik zmienia stronę, ale wchodząc z przeglądarki np. na List?page=7, nie trafiam na 7 stronę.
+      //   Tutaj jestem w stanie zmienić stronę w linku, ale na pewno da się zrobić to lepiej. Klik zmienia stronę, ale wchodząc z przeglądarki np. na List?page=7, nie trafiam na 7 stronę.
       const nextPage = () => history.push(`/List?page=${page}`);
       nextPage();
     }
@@ -79,50 +82,71 @@ const ListContainer = () => {
     }
   };
 
+  const handleSelect = (e) => {
+    console.log("select", e.target.value);
+    setListValue((listValue = e.target.value));
+  };
+
+  const handleChange = () => {
+    setCheckValue((checkValue = !checkValue));
+    const sortedChars = [...chars.results];
+    sortedChars.sort((a, b) => a.name.localeCompare(b.name));
+
+    setSortedChars(sortedChars);
+    console.log(checkValue, sortedChars);
+  };
+
   return (
     <Wrapper>
       <BtnWrap>
         <h4>
           Strona {page} / {chars ? chars.info.pages : "..."}
         </h4>
-
         <Button onClick={prev}>Poprzednia</Button>
         <Button onClick={next}>Następna</Button>
       </BtnWrap>
-
-      {/* Tutaj mam kłopot z przekazaniem wartości i przefiltrowaniem */}
       <div>
         <label htmlFor="status">Status postaci: </label>
-        <select name="status" id="status">
-          <option value="alive">Żywa</option>
-          <option value="dead">Martwa</option>
-          <option value="unknow">Nieznany</option>
+        <select name="status" id="status" onClick={handleSelect}>
+          <option value="all">Wszystkie</option>
+          <option value="Alive">Żywa</option>
+          <option value="Dead">Martwa</option>
+          <option value="unknown">Nieznany</option>
         </select>
+      </div>
+      <div>
+        <FormControlLabel
+          control={<Switch onChange={handleChange} />}
+          label={checkValue ? `Wróć` : `Posortuj A-Z`}
+        />
       </div>
 
       <ListWrap>
         {chars ? (
           <>
-            {chars.results.map((char) => {
-              return (
-                <TileWrap
-                  key={char.id}
-                  onClick={() => history.push(`/CharPage${char.id}`)}
-                //   Już udaje mi się zrobić odnośnik do nowej strony po kliknięciu w portret, ale nie wiem czy tworzyć nowy komponent, czy jakoś mapować dane z api żeby wyświetlało jedną postać w oprarciu o pojedyncze ID. Jestem pewien że da się to prosto zrobić.
-                >
-                  <img
-                    src={char.image}
-                    alt="portrait"
-                    width="60%"
-                    height="60%"
-                  />
-                  <P>Imię: {char.name}</P>
-                  <P>Gatunek:{char.species}</P>
-                  <P>Status: {char.status}</P>
-                  <P>Pochodzenie: {char.origin.name}</P>
-                </TileWrap>
-              );
-            })}
+            {(checkValue ? sortedChars : chars.results).filter((char) =>
+                listValue === "all" ? true : char.status === listValue
+              )
+              .map((char) => {
+                return (
+                  <TileWrap
+                    key={char.id}
+                    onClick={() => history.push(`/CharPage${char.id}`)}
+                    //   Już udaje mi się zrobić odnośnik do nowej strony po kliknięciu w portret, ale nie wiem czy tworzyć nowy komponent, czy jakoś mapować dane z api żeby wyświetlało jedną postać w oprarciu o pojedyncze ID. Jestem pewien że da się to prosto zrobić.
+                  >
+                    <img
+                      src={char.image}
+                      alt="portrait"
+                      width="60%"
+                      height="60%"
+                    />
+                    <P>Imię: {char.name}</P>
+                    <P>Gatunek: {char.species}</P>
+                    <P>Status: {char.status}</P>
+                    <P>Pochodzenie: {char.origin.name}</P>
+                  </TileWrap>
+                );
+              })}
           </>
         ) : (
           <CircularProgress />
@@ -133,11 +157,7 @@ const ListContainer = () => {
 };
 
 const List = () => {
-  return (
-    <>
-      <ListContainer />
-    </>
-  );
+  return <ListContainer />;
 };
 
 export default List;

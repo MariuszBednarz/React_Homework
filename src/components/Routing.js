@@ -14,7 +14,9 @@ import Register from "./Register";
 import Login from "./Login";
 import Icons from "./Icons"
 
-
+const StyledLink = styled(Link)`
+text-decoration: none;
+`;
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -44,28 +46,28 @@ const Routing = () => {
     <Router>
       <Wrapper>
         <Nav>
-          <Link to="/LandingPage">
-            <Button variant="contained" color="primary">Logo </Button>{" "}
-          </Link>
+          <StyledLink to="/LandingPage" style={{textDecoration: "none"}}>
+            <Button variant="contained" color="primary"  >Logo </Button>{" "}
+          </StyledLink>
           <BtnWrap>
-            <Link to="/About">
+            <StyledLink to="/About">
               <Button variant="contained" color="primary">O mnie</Button>
-            </Link>
-            <Link to="/Stoper">
+            </StyledLink>
+            <StyledLink to="/Stoper">
               <Button variant="contained" color="primary">Stoper</Button>
-            </Link>
-            <Link to="/Counter">
+            </StyledLink>
+            <StyledLink to="/Counter">
               <Button variant="contained" color="primary">Licznik</Button>
-            </Link>
-            <Link to="/List">
+            </StyledLink>
+            <StyledLink to="/List">
               <Button variant="contained" color="primary">Lista</Button>
-            </Link>
-            <Link to="/Register">
+            </StyledLink>
+            <StyledLink to="/Register">
               <Button variant="contained" color="primary">Rejestruj</Button>
-            </Link>
-            <Link to="/Login">
+            </StyledLink>
+            <StyledLink to="/Login">
               <Button variant="contained" color="primary">Zaloguj</Button>
-            </Link>
+            </StyledLink>
           </BtnWrap>
         </Nav>
         <Route path="/LandingPage" component={LandingPage}> 
