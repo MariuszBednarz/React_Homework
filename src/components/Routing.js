@@ -10,9 +10,12 @@ import About from "./About";
 import Stoper from "./Stoper";
 import Counter from "./Counter";
 import List from "./List";
-import Register from "./Register";
+import RegisterInput from "./Register";
 import Login from "./Login";
 import Icons from "./Icons"
+import RegistrationConfirmation from "./RegistrationConfirmation"
+import Logged from "./Logged";
+
 
 const StyledLink = styled(Link)`
 text-decoration: none;
@@ -80,8 +83,11 @@ const Routing = () => {
         <Route path="/Stoper" component={Stoper} />
         <Route path="/Counter" component={Counter} />
         <Route path="/List" component={List} />
-        <Route path="/Register" component={Register} />
+        <Route path="/Register" component={RegisterInput} />
         <Route path="/Login" component={Login} />
+        <Route path="/RegistrationConfirmation" component={RegistrationConfirmation} />
+        <Route path="/Logged" component={Logged} />
+
       </Wrapper>
     </Router>
   );

@@ -59,6 +59,7 @@ const ListContainer = () => {
       .then((response) => {
         const responseChars = response.data;
         setChars(responseChars);
+        setSortedChars(responseChars.results);
       });
   }, [page]);
 
@@ -88,9 +89,15 @@ const ListContainer = () => {
   };
 
   const handleChange = () => {
-    setCheckValue((checkValue = !checkValue));
+    const newCheckValue = !checkValue;
+    setCheckValue(newCheckValue);
     const sortedChars = [...chars.results];
-    sortedChars.sort((a, b) => a.name.localeCompare(b.name));
+    sortedChars.sort((a, b) =>
+      newCheckValue
+      //tu dzięki radzie Mateusza działa
+        ? b.name.localeCompare(a.name)
+        : a.name.localeCompare(b.name)
+    );
 
     setSortedChars(sortedChars);
     console.log(checkValue, sortedChars);
@@ -124,7 +131,8 @@ const ListContainer = () => {
       <ListWrap>
         {chars ? (
           <>
-            {(checkValue ? sortedChars : chars.results).filter((char) =>
+            {(checkValue ? sortedChars : chars.results)
+              .filter((char) =>
                 listValue === "all" ? true : char.status === listValue
               )
               .map((char) => {

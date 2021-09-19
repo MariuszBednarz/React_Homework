@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Karol",
+      "secondName": "Kowalski",
+      "password": "pass1"
+    },
+    {
+      "id": 2,
+      "name": "Zbigniew",
+      "secondName": "Nowicki",
+      "password": "pass2"
+    },
+    {
+      "id": 3,
+      "name": "Mariusz",
+      "secondName": "Bednarz",
+      "password": "Pass123"
+    },
+    {
+      "id": 4,
+      "name": "Mariusz",
+      "secondName": "Kaczuch",
+      "password": "123"
+    }
+  ]
+}
