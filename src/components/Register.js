@@ -34,6 +34,8 @@ const RegisterInput = () => {
   let [secNameFilled, setSecNameFilled] = useState(false);
   let [passFilled, setPassFilled] = useState(false);
 
+  let [alreadyRegisteredAlert, setAlreadyRegisteredAlert] = useState(false);
+
   useEffect(() => {
     axios.get(`http://localhost:3000/users`).then((response) => {
       const userDatabase = response.data;
@@ -42,6 +44,7 @@ const RegisterInput = () => {
   });
 
   const handleRegisterSubmit = () => {
+
     if (inputName !== undefined) {
       console.log("inputName", inputName);
       setNameFilled(true);
@@ -56,6 +59,8 @@ const RegisterInput = () => {
     } else setPassFilled(false);
 
     if (nameFilled && secNameFilled && passFilled) {
+      if (true) {
+
       axios.post(`http://localhost:3000/users`, {
         id: ++userDatabase.length,
         name: inputName,
@@ -63,6 +68,7 @@ const RegisterInput = () => {
         password: inputPassword,
       });
       history.push(`/RegistrationConfirmation`);
+    } else {setAlreadyRegisteredAlert(true)}
     }
   };
 
