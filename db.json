@@ -20,9 +20,15 @@
     },
     {
       "id": 4,
-      "name": "Mariusz",
-      "secondName": "Kaczuch",
-      "password": "123"
+      "name": "Kamil",
+      "secondName": "Kamilski",
+      "password": "pass345"
+    },
+    {
+      "id": 5,
+      "name": "Kamil ",
+      "secondName": "Kamilski",
+      "password": "pass345"
     }
   ]
 }

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { CircularProgress, FormControlLabel, Switch, Button } from "@material-ui/core";
+import {
+  CircularProgress,
+  FormControlLabel,
+  Switch,
+  Button,
+} from "@material-ui/core";
 import styled from "styled-components";
 import { useHistory } from "react-router";
 
@@ -44,7 +49,7 @@ const P = styled.p`
   padding: 5px;
 `;
 
-const ListContainer = () => {
+const ListContainer = ({ setList }) => {
   const [chars, setChars] = useState();
   const [sortedChars, setSortedChars] = useState();
   const history = useHistory();
@@ -60,6 +65,7 @@ const ListContainer = () => {
         const responseChars = response.data;
         setChars(responseChars);
         setSortedChars(responseChars.results);
+        setList(responseChars);
       });
   }, [page]);
 
@@ -94,8 +100,8 @@ const ListContainer = () => {
     const sortedChars = [...chars.results];
     sortedChars.sort((a, b) =>
       newCheckValue
-      //tu dzięki radzie Mateusza działa
-        ? b.name.localeCompare(a.name)
+        ? //tu dzięki radzie Mateusza działa
+          b.name.localeCompare(a.name)
         : a.name.localeCompare(b.name)
     );
 
@@ -164,8 +170,8 @@ const ListContainer = () => {
   );
 };
 
-const List = () => {
-  return <ListContainer />;
+const List = ({ setList }) => {
+  return <ListContainer setList={setList} />;
 };
 
 export default List;

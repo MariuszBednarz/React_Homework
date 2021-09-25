@@ -27,12 +27,13 @@ const Login = () => {
   let [inputName, setInputName] = useState();
   let [inputSecondName, setInputSecondName] = useState();
   let [inputPassword, setInputPassword] = useState();
-  const [userDatabase, setUserDatabase] = useState();
+  const [userDatabase, setUserDatabase] = useState([]);
   const history = useHistory();
 
   let [nameFilled, setNameFilled] = useState(false);
   let [secNameFilled, setSecNameFilled] = useState(false);
   let [passFilled, setPassFilled] = useState(false);
+  let [error, setError] = useState(false);
 
   useEffect(() => {
     axios.get(`http://localhost:3000/users`).then((response) => {
@@ -41,26 +42,32 @@ const Login = () => {
     });
   });
 
-console.log(userDatabase)
 
   const handleLoginSubmit = () => {
     console.log("działa");
     if (inputName !== undefined) {
-      console.log("inputName", inputName);
       setNameFilled(true);
     } else setNameFilled(false);
     if (inputSecondName !== undefined) {
-      console.log("inputSecName", inputSecondName);
       setSecNameFilled(true);
     } else setSecNameFilled(false);
     if (inputPassword !== undefined) {
-      console.log("inputPassword", inputPassword);
       setPassFilled(true);
     } else setPassFilled(false);
 
+    let loginSuccessfull = false;
+    userDatabase.map((user) =>
+      user.name === inputName &&
+      user.secondName === inputSecondName &&
+      user.password === inputPassword
+        ? (loginSuccessfull = true)
+        : loginSuccessfull = false
+    );
 
-    if (true) {
+    if (loginSuccessfull) {
       history.push(`/Logged`);
+    } else {
+      setError(true)
     }
   };
 
@@ -124,7 +131,7 @@ console.log(userDatabase)
         {passFilled ? "" : <Alert severity="warning">Podaj Hasło</Alert>}
 
       </InputWrap>
-      {true ? "" : <Alert severity="error">Użytkownik nie istnieje</Alert>}
+      {error ? <Alert severity="error">Użytkownik nie istnieje</Alert> : "" }
 
     </Wrapper>
   );

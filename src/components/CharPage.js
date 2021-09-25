@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const Wrapper = styled.div`
+const CharWrapper = styled.div`
   position: relative;
   top: 100px;
   width: 100vw;
@@ -45,7 +45,7 @@ const CharPage = () => {
   }, [page]);
 
   return (
-    <Wrapper>
+    <CharWrapper>
       {chars ? (
 
         //tu poniżej wpisane roboczo, żeby nie wywalało błędów. Właśnie w to miejsce chcę przekazać dane w którą postać kliknąłem
@@ -59,7 +59,7 @@ const CharPage = () => {
       ) : (
         ""
       )}
-    </Wrapper>
+    </CharWrapper>
   );
 };
 

@@ -27,7 +27,7 @@ const RegisterInput = () => {
   let [inputName, setInputName] = useState();
   let [inputSecondName, setInputSecondName] = useState();
   let [inputPassword, setInputPassword] = useState();
-  const [userDatabase, setUserDatabase] = useState();
+  const [userDatabase, setUserDatabase] = useState([]);
   const history = useHistory();
 
   let [nameFilled, setNameFilled] = useState(false);
@@ -44,7 +44,6 @@ const RegisterInput = () => {
   });
 
   const handleRegisterSubmit = () => {
-
     if (inputName !== undefined) {
       console.log("inputName", inputName);
       setNameFilled(true);
@@ -58,18 +57,28 @@ const RegisterInput = () => {
       setPassFilled(true);
     } else setPassFilled(false);
 
-    if (nameFilled && secNameFilled && passFilled) {
-      if (true) {
+    let registerSuccessfull = false;
+    userDatabase.map((user) =>
+      user.name === inputName &&
+      user.secondName === inputSecondName &&
+      user.password === inputPassword
+        ? (registerSuccessfull = false)
+        : registerSuccessfull = true
+    );
 
-      axios.post(`http://localhost:3000/users`, {
-        id: ++userDatabase.length,
-        name: inputName,
-        secondName: inputSecondName,
-        password: inputPassword,
-      });
-      history.push(`/RegistrationConfirmation`);
-    } else {setAlreadyRegisteredAlert(true)}
-    }
+  
+      if (registerSuccessfull) {
+        axios.post(`http://localhost:3000/users`, {
+          id: ++userDatabase.length,
+          name: inputName,
+          secondName: inputSecondName,
+          password: inputPassword,
+        });
+        history.push(`/RegistrationConfirmation`);
+      } else {
+        setAlreadyRegisteredAlert(true);
+      }
+    
   };
 
   const handleNameInput = (e) => {
@@ -125,12 +134,16 @@ const RegisterInput = () => {
         Zarejestruj
       </Button>
       <InputWrap>
-      {nameFilled ? "" : <Alert severity="warning">Podaj Imię</Alert>}
-      {secNameFilled ? "" : <Alert severity="warning">Podaj Nazwisko</Alert>}
-      {passFilled ? "" : <Alert severity="warning">Podaj Hasło</Alert>}
+        {nameFilled ? "" : <Alert severity="warning">Podaj Imię</Alert>}
+        {secNameFilled ? "" : <Alert severity="warning">Podaj Nazwisko</Alert>}
+        {passFilled ? "" : <Alert severity="warning">Podaj Hasło</Alert>}
       </InputWrap>
-      {true ? "" : <Alert severity="error">Taki użytkownik już istnieje - użyj innych danych</Alert>}
-      </Wrapper>
+      {alreadyRegisteredAlert ? 
+       <Alert severity="error">
+       Taki użytkownik już istnieje - użyj innych danych
+     </Alert>
+       : ""}
+    </Wrapper>
   );
 };
 
